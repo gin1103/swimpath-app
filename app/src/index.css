@@ -1,0 +1,589 @@
+:root {
+  color-scheme: light;
+  --color-bg: #f7fafc;
+  --color-surface: #ffffff;
+  --color-text: #16202a;
+  --color-muted: #5b6b7a;
+  --color-brand: #0e74bd;
+  --color-border: #e2e8f0;
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0 0 0.75em;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-shell__content {
+  flex: 1;
+  padding: 1rem 1rem 5rem;
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app-shell__nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+}
+
+.app-shell__nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+.app-shell__nav a.is-active {
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.page-placeholder {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.page-placeholder p {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Shared card used across Home and (later) other data pages. */
+.home-card,
+.skill-stage {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.home-card--current {
+  border-color: var(--color-brand);
+  background: color-mix(in srgb, var(--color-brand) 6%, var(--color-surface));
+}
+
+.home-card__eyebrow {
+  color: var(--color-brand);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.35em;
+}
+
+.home-card__skill {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.35em;
+}
+
+.home-card__description {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.home-card__meta-label {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.4em;
+}
+
+.home-card__empty {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.home-card__list {
+  margin: 0 0 0.75em;
+  padding-left: 1.1em;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.home-card__cta {
+  display: inline-block;
+  background: var(--color-brand);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+}
+
+.home-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.home-stat {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  text-align: center;
+}
+
+.home-stat__value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.2em;
+}
+
+.home-stat__label {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.home-strokes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.home-strokes__item {
+  display: block;
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 0.75rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Skill tree */
+.skill-tree__routes {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.skill-tree__routes button {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.skill-tree__routes button.is-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+
+.skill-stage__title {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin-bottom: 0.6em;
+}
+
+.skill-stage__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-row__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+}
+
+.skill-row--locked .skill-row__link {
+  opacity: 0.55;
+}
+
+.skill-row--learning .skill-row__link {
+  border-color: var(--color-brand);
+}
+
+.skill-row__title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.15em;
+}
+
+.skill-row__description {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.skill-row__status {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--color-border);
+  color: var(--color-muted);
+}
+
+.skill-row__status--available {
+  background: color-mix(in srgb, var(--color-brand) 15%, transparent);
+  color: var(--color-brand);
+}
+
+.skill-row__status--learning {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.skill-row__status--completed {
+  background: #1a9f5c;
+  color: #fff;
+}
+
+/* Training flow */
+.training-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.training-card__label {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+.training-choice-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.training-choice-grid button {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.85rem;
+}
+
+.training-choice-grid button.is-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+  font-weight: 600;
+}
+
+.training-skill-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.training-skill-list button {
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.training-skill-list button.is-active {
+  border-color: var(--color-brand);
+  background: color-mix(in srgb, var(--color-brand) 10%, var(--color-surface));
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.training-next {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.training-next:disabled {
+  opacity: 0.5;
+}
+
+.training-target {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.training-target input {
+  display: block;
+  margin-top: 0.4em;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  font-size: 1rem;
+}
+
+.training-timer {
+  font-size: 3rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  margin-bottom: 0.2em;
+}
+
+.training-timer-controls {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.training-timer-controls button,
+.training-timer-controls a {
+  flex: 1;
+  text-align: center;
+  padding: 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.training-notes {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.training-notes textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.4em;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  font: inherit;
+  resize: vertical;
+}
+
+.training-error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Skill detail page */
+.skill-detail__breadcrumb {
+  color: var(--color-brand);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.35em;
+}
+
+.skill-detail__safety {
+  background: #fdecea;
+  border: 1px solid #f2b8b5;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  color: #7a2e27;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.skill-detail__safety p:last-child {
+  margin-bottom: 0;
+}
+
+.skill-detail__manual-tag {
+  margin-left: 0.5em;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.skill-detail__prereq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-detail__prereq-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.skill-detail__checklist {
+  list-style: none;
+  margin: 0 0 0.5em;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-detail__checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.skill-detail__checklist input {
+  margin-top: 0.2em;
+  flex-shrink: 0;
+}
+
+/* History page */
+.history-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.history-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.history-tabs button.is-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+
+.history-bar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.history-bar-list__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.25em;
+}
+
+.history-bar {
+  background: var(--color-border);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.history-bar__fill {
+  background: var(--color-brand);
+  height: 100%;
+  border-radius: 999px;
+}
+
+.history-progress-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.history-progress-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+/* Settings page */
+.settings-import-errors {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+  padding-left: 1.1em;
+  line-height: 1.6;
+}
+
+.settings-import-summary p {
+  font-size: 0.9rem;
+  margin-bottom: 0.4em;
+}
